@@ -28,6 +28,7 @@ function NavbarSearch() {
               Contacts
             </a>
           </div>
+          
           <div className="mx-4">
             <input
               type="text"
