@@ -16,7 +16,7 @@ function Footer() {
           <img
             src="./src/assets/logo.png"
             alt="Logo"
-            style={{ width: '80px' }}
+            style={{ width: '120px' }}
           />
         </a>
       </nav>
