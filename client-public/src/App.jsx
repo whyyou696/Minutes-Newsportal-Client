@@ -10,5 +10,5 @@ function App() {
     <DetailPage/>
     </>
   )
-}
+}                             
 export default App
