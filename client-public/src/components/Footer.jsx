@@ -1,6 +1,6 @@
 import React from "react";
 
-function Footer() {
+export default function Footer() {
   return (
     <footer className="footer footer-center bg-white text-black rounded p-2 text-lg">
       <nav className="grid grid-flow-col gap-4">
@@ -25,4 +25,3 @@ function Footer() {
   );
 }
 
-export default Footer;

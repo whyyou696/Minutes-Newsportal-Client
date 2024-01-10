@@ -1,5 +1,5 @@
 import React from "react";
-const Testimony = () => {
+export default function Testimony() {
   return (
     <>
       <div className="flex justify-center mt-7 mb-20">
@@ -143,5 +143,3 @@ const Testimony = () => {
     </>
   );
 };
-
-export default Testimony;
