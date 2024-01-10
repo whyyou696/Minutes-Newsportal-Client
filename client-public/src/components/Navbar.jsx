@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function NavbarSearch() {
+export default function Navbar() {
   return (
     <>
       <div className="bg-white flex justify-between items-center p-4">
