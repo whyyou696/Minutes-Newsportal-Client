@@ -1,55 +1,149 @@
-import React from "react";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
-export default function RegisterPage() {
+import registerImage from "../assets/bgregister.jpg";
+import logo from "../assets/logo.png";
+
+function Register() {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    phoneNumber: "",
+    address: "",
+  });
+
+  const changeInput = (e) => {
+    const { name, value } = e.target;
+    setForm(() => {
+      return {
+        ...form,
+        [name]: value,
+      };
+    });
+  };
+
+  const submit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:3000/users/add-user", form, {
+        headers: {
+          Authorization: "Bearer " + localStorage.access_token,
+        },
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: "Register Success",
+      });
+
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops",
+        text: error.response.data.message,
+      });
+    }
+  };
+
   return (
-    <>
-    <div className="flex flex-col lg:flex-row min-h-screen overflow-hidden">
-      <div className="lg:w-1/2 bg-cover bg-center">
-        <img
-          src="./src/assets/bgregister.jpg"
-          alt="Background"
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <section className="w-full h-screen flex justify-center items-center">
+          {/* Image */}
+      <div className="w-30% h-full hidden md:block mr-10">
+          <img src={registerImage} alt="Registration" className="w-full h-full object-cover" />
+        </div>
 
-      <div className="relative flex flex-col justify-center items-center p-6 m-auto bg-white bg-opacity-70 rounded-md shadow-xl shadow-blue-500/40 ring ring-2 ring-blue-500 lg:max-w-xl">
-        <img src="./src/assets/logo.png" alt="Logo" className="w-20 h-20 mb-4" />
-        <h1 className="text-3xl font-semibold text-center text-blue-500">
-          Register
-        </h1>
-        <form className="mt-6">
-          <div className="mb-2">
+      <div className="w-[70%] h-fit bg-white shadow-lg px-10 rounded-lg flex">
+        <div className="flex-1">
+        <div className="text-center text-sky-400 mt-10">
+            <img src={logo} alt="Logo" className="w-25 h-20 mx-auto mb-3" />
+            <h1 className="text-[30px] mb-3">Register</h1>
+          </div>
+          {/* Form */}
+          <form onSubmit={submit} className="mb-10">
+          <div className="mb-6">
             <label
               htmlFor="email"
-              className="block text-sm font-semibold text-gray-800"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Email
             </label>
             <input
-              type="email"
+              onChange={changeInput}
+              name="email"
+              type="text"
               id="email"
-              className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="w-full p-2.5 shadow-md rounded-md italic"
+              placeholder="name@example.com"
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-6">
             <label
               htmlFor="password"
-              className="block text-sm font-semibold text-gray-800"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Password
             </label>
             <input
-              type="password"
+              onChange={changeInput}
+              name="password"
+              type="text"
               id="password"
-              className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="w-full p-2.5 shadow-md rounded-md"
+              placeholder="*****"
             />
           </div>
-        </form>
-        <button className="btn btn-outline btn-info">Register</button>
-
+          <div className="mb-6">
+            <label
+              htmlFor="phoneNumber"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Phone Number
+            </label>
+            <input
+              onChange={changeInput}
+              name="phoneNumber"
+              type="text"
+              id="phoneNumber"
+              className="w-full p-2.5 shadow-md rounded-md italic"
+              placeholder="Input Here....."
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="address"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Address
+            </label>
+            <input
+              onChange={changeInput}
+              name="address"
+              type="text"
+              id="address"
+              className="w-full p-2.5 shadow-md rounded-md italic"
+              placeholder="Input Here....."
+            />
+          </div>
+            <div className="w-full h-fit flex justify-center items-center">
+              <button
+                type="submit"
+                className="bg-sky-400 hover:bg-sky-300 transition-all ease-in-out duration-300 text-white px-10 py-2 rounded-md"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-  </>
+        
+    </section>
   );
 }
+
+export default Register;
 

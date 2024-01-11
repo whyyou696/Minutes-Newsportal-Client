@@ -1,6 +1,54 @@
 import React from "react";
+import axios from "axios";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function LoginPage() {
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { data } = await axios({
+        method: "post",
+        url: `https://minutes-news.wahyurj.my.id/users/login`,
+        data: form,
+      });
+      localStorage.setItem("access_token", data.access_token);
+      Swal.fire({
+        icon: "success",
+        title: "Login Success!",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+      navigate("/");
+      console.log(data);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.response.data.message,
+      });
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className="flex flex-col lg:flex-row min-h-screen overflow-hidden">
@@ -28,7 +76,8 @@ export default function LoginPage() {
               <input
                 type="email"
                 id="email"
-                className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                onChange={handleChange}
+                className="block w-full px-4 py-2 mt-2 text-black bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
             </div>
             <div className="mb-2">
@@ -41,11 +90,12 @@ export default function LoginPage() {
               <input
                 type="password"
                 id="password"
-                className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                onChange={handleChange}
+                className="block w-full px-4 py-2 mt-2 text-blue-500 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
             </div>
           </form>
-          <button className="btn btn-outline btn-info">Login</button>
+          <button onClick={handleSubmit} type="submit" className="btn btn-outline btn-info">Login</button>
 
           <p className="mt-8 text-xs font-light text-center text-gray-700">
             {" "}

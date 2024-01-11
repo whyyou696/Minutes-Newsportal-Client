@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import TableCategoryList from "../components/TableCategoryList"
 import Swal from "sweetalert2";
-import TableArticleList from "../components/TableArticleList";
 
-const HomePage = () => {
-  const [articles, setArticles] = useState([]);
+export default function CategoryPage() {
+  const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchDataArticle = async () => {
+    const fetchDataCategory = async () => {
       try {
-        const response = await Axios.get("https://minutes-news.wahyurj.my.id/publics");
-        setArticles(response.data.article);
+        const response = await Axios.get("https://minutes-news.wahyurj.my.id/publics/categories");
+        setCategory(response.data);
         setTimeout(() => {
           setLoading(false);
         }, 1000);
@@ -24,7 +24,7 @@ const HomePage = () => {
       }
     };
 
-    fetchDataArticle();
+    fetchDataCategory();
   }, []);
 
   return (
@@ -34,10 +34,8 @@ const HomePage = () => {
             <div className="loading loading-lg"></div>
           </div>
       ) : (
-        <TableArticleList articles={articles} />
+        <TableCategoryList category={category} />
       )}
     </div>
   );
 };
-
-export default HomePage;

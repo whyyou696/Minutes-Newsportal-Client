@@ -1,19 +1,14 @@
-import React from 'react'
-import RegisterPage from './pages/RegisterPage'
-import LoginPage from './pages/LoginPage'
-import HomePage from './pages/HomePage'
-import DetailPage from './pages/DetailPage'
+import Navbar from "./components/Navbar";
+import { Outlet } from "react-router-dom";
 
-function App() {
-
-  return (
-    <>
-    <RegisterPage/>
-    <LoginPage/>
-    <HomePage/>
-    <DetailPage/>
-    </>
-  )
+export default function Layout() {
+    return (
+        <>
+            <Navbar />
+            <Outlet />
+        </>
+    );
 }
 
-export default App
+
+
