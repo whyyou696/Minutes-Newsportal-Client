@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function DetailPage () {
   const [article, setArticle] = useState({});
@@ -10,10 +11,14 @@ export default function DetailPage () {
   useEffect(() => {
     const fetchArticleById = async () => {
       try {
-        const response = await Axios.get(`http://localhost:3000/publics/${id}`);
+        const response = await Axios.get(`https://minutes-news.wahyurj.my.id/publics/${id}`);
         setArticle(response.data);
       } catch (error) {
-        console.error("Error fetching article:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response.data.message,
+        });
       } finally {
         setTimeout(() => {
           setLoading(false);
