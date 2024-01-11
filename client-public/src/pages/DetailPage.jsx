@@ -1,51 +1,56 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
-export default function DetailPage() {
-  const { id } = useParams();
+export default function DetailPage () {
   const [article, setArticle] = useState({});
-
-  const fetchDataById = async () => {
-    try {
-      const { data } = await Axios.get(`https://ch01-newsportal.wahyurj.my.id/publics/${id}`);
-      setArticle(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
 
   useEffect(() => {
-    fetchDataById();
-  }, []);
+    const fetchArticleById = async () => {
+      try {
+        const response = await Axios.get(`http://localhost:3000/publics/${id}`);
+        setArticle(response.data);
+      } catch (error) {
+        console.error("Error fetching article:", error);
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 1500);
+      }
+    };
+
+    fetchArticleById();
+  }, [id]);
 
   return (
-    <div>
-      <div className="flex flex-col w-full">
-        <div className="grid h-20 card bg-red-500 rounded-box place-items-center text-white font-extrabold italic text-3xl">{article.title}</div>
-      </div>
-
-      <div className="flex mt-10">
-        <div className="relative overflow-hidden rounded-lg ml-10">
+    <div className="min-h-screen bg-gray-100 py-12">
+      {loading ? (
+        <div className="flex items-center justify-center h-screen">
+          <div className="loading loading-lg"></div>
+        </div>
+      ) : (
+        <div className="max-w-4xl mx-auto bg-white shadow-md rounded-md overflow-hidden">
           <img
             src={article.imgUrl}
-            alt="Description of the image"
-            className="w-full h-auto rounded-lg"
+            alt="Article"
+            className="w-full h-96 object-cover mx-auto"
           />
-          {/* untuk gambar dari server */}
-          <div className="absolute bottom-0 left-0 w-full  bg-white bg-opacity-75 p-4 text-center">
-            <p className="text-sm text-gray-800 font-semibold italic">
-              {/* Menampilkan deskripsi dari server */}
-              {article.content}
-            </p>
+          <div className="p-6">
+            <h1 className="text-3xl font-bold text-gray-800 mb-3">{article.title}</h1>
+            <p className="text-gray-600">{article.content}</p>
+            <span className="inline-block bg-blue-500 text-white px-3 py-2 rounded-full mt-5">
+              Category: {article.categoryId}
+            </span>
+          </div>
+          <div className="p-4 flex justify-end">
+            <Link to="/" className="inline-block bg-red-500 text-white px-3 py-2 rounded-full mt-5 hover:bg-gray-500">
+              Back
+            </Link>
           </div>
         </div>
-      </div>
-      <p className="text-center text-sm text-blue-600 mt-20 italic">
-        Kutipan berita di atas diambil dari server ©Minutes Newsportal
-      </p>
-
-      <div className="mt-5"></div>
+      )}
     </div>
   );
 }

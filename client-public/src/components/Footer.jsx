@@ -1,5 +1,5 @@
 import React from "react";
-
+import logo from "../assets/logo.png";
 export default function Footer() {
   return (
     <footer className="footer footer-center bg-white text-black rounded p-2 text-lg">
@@ -14,7 +14,7 @@ export default function Footer() {
       <nav>
         <a href="/" className="font-bold">
           <img
-            src="./src/assets/logo.png"
+            src={logo}
             alt="Logo"
             style={{ width: '120px' }}
           />

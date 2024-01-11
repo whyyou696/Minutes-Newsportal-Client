@@ -1,12 +1,12 @@
 import React from "react";
-
+import logo from "../assets/logo.png";
 export default function Navbar() {
   return (
     <>
       <div className="bg-white flex justify-between items-center p-4">
         <div className="flex items-center">
           <img
-            src="./src/assets/logo.png"
+            src={logo}
             alt="Logo"
             className="w-25 h-20"
           />
@@ -14,7 +14,7 @@ export default function Navbar() {
         <div className="flex items-center">
           <div className="mx-4">
             <a
-              href="#"
+              href="/"
               className="text-gray text-lg font-bold hover:text-red-600 animate-pulse transition duration-300"
             >
               Home

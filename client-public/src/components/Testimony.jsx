@@ -14,8 +14,8 @@ export default function Testimony() {
           <div className="card-body">
             <h2 className="card-title">Ganjar Pranowo</h2>
             <p>
-            The Best Experience Doing An Auction 
-            <br/>In This Online Shop.
+            Terupdate,Teraktual, dan Terpercaya Untuk Kita Semua
+            <br/>Tanpa Adanya Hoax
             </p>
             <div className="rating">
               <input
@@ -59,7 +59,7 @@ export default function Testimony() {
           <div className="card-body">
             <h2 className="card-title">Prabowo Subianto</h2>
             <p>
-              The Items Are Authentic.
+              Memberikan Pengalaman Terbaik Untuk Anda
               <br />
               100% Trusted and recommended.
             </p>
@@ -105,9 +105,9 @@ export default function Testimony() {
           <div className="card-body">
             <h2 className="card-title">Anies Baswedan</h2>
             <p>
-              At This Auction I Got My Favourite Item
+              Baca Berita Disini dan Dapatkan Pengalaman Baru
               <br />
-              What I Want With The Best Price
+              Yang Tidak Ada Di Portal News Lain
             </p>
             <div className="rating">
               <input
