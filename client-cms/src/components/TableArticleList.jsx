@@ -5,7 +5,7 @@ export default function TableArticleList({ articles }) {
     <div className="bg-gray-100 p-4 rounded-md shadow-md">
       <table className="w-full border-collapse border border-gray-300 min-w-full bg-white bg-opacity-90 rounded">
         <thead>
-          <tr className="bg-red-500 text-white text-center font-bold text-lg border-b border-r border-white py-2 px-4">
+          <tr className="bg-gray-300 text-black text-center font-bold text-lg border-b border-r border-white py-2 px-4">
             <th className="border-r border-white">ID</th>
             <th className="border-r border-white">Title</th>
             <th className="border-r border-white">Content</th>
@@ -23,7 +23,7 @@ export default function TableArticleList({ articles }) {
               <td className="border-r border-white">{article.title}</td>
               <td className="border-r border-white">{article.content}</td>
               <td>
-                <img src={article.imgUrl} alt={article.title} width="1500" height="1500" />
+                <img src={article.imgUrl} alt={article.title} width="300" height="200" />
               </td>
               <td className="border-r border-white">{article.categoryId}</td>
               <td className="border-r border-white">{article.authorId}</td>

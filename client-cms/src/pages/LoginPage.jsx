@@ -22,15 +22,15 @@ export default function Login() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(`https://minutes-news.wahyurj.my.id/login`, form);
+      const { data } = await axios.post(`https://minutes-news.wahyurj.my.id/users/login`, form);
       Swal.fire({
         icon: "success",
         title: "Login Success",
-        text: `Welcome ${form.email}`,
+        text: `Welcome`,
       });
-
-      localStorage.access_token = data.token;
-      navigate("/");
+      localStorage.access_token = data.access_token;
+      // console.log(data.access_token)
+      navigate("/home");
     } catch (error) {
       Swal.fire({
         icon: "error",

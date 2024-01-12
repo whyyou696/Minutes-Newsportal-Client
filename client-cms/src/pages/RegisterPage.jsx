@@ -14,23 +14,22 @@ export default function Register() {
     address: "",
   });
 
-  const changeInput = (e) => {
-    const { name, value } = e.target;
+  const changeInput = (el) => {
+    const { name, value } = el.target;
     setForm(() => ({
       ...form,
       [name]: value,
     }));
   };
-
-  const submit = async (e) => {
-    e.preventDefault();
+  const submit = async (el) => {
+    el.preventDefault();
     try {
-      await axios.post("http://localhost:3000/users/add-user", form, {
+      await axios.post("https://minutes-news.wahyurj.my.id/users/add-user", form, {
         headers: {
           Authorization: "Bearer " + localStorage.access_token,
         },
       });
-
+      // console.log("<<<<APA AJA BOLEEH")
       Swal.fire({
         icon: "success",
         title: "Register Success",
@@ -57,6 +56,19 @@ export default function Register() {
           </div>
           {/* Form */}
           <form onSubmit={submit} className="mb-4">
+            <div className="mb-3">
+              <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Username
+              </label>
+              <input
+                onChange={changeInput}
+                name="username"
+                type="text"
+                id="username"
+                className="w-full p-2.5 shadow-md rounded-md italic"
+                placeholder="Input Here...."
+              />
+            </div>
             <div className="mb-3">
               <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Email

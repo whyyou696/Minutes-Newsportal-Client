@@ -10,11 +10,16 @@ export default function HomePage() {
   useEffect(() => {
     const fetchDataArticle = async () => {
       try {
+        // const response = await Axios.get(
+        //   "https://minutes-news.wahyurj.my.id/publics"
+        // ),
         const response = await Axios.get(
-          "https://minutes-news.wahyurj.my.id/publics"
-        )
-        // const response = await Axios.get("http://localhost:3000/articles");
-        setArticles(response.data.article);
+          "https://minutes-news.wahyurj.my.id/articles",{
+          headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      })
+        setArticles(response.data);
         setTimeout(() => {
           setLoading(false);
         }, 1000);
