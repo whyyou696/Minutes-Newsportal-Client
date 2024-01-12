@@ -3,14 +3,17 @@ import Axios from "axios";
 import Swal from "sweetalert2";
 import TableArticleList from "../components/TableArticleList";
 
-const HomePage = () => {
+export default function HomePage() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDataArticle = async () => {
       try {
-        const response = await Axios.get("https://minutes-news.wahyurj.my.id/publics");
+        const response = await Axios.get(
+          "https://minutes-news.wahyurj.my.id/publics"
+        )
+        // const response = await Axios.get("http://localhost:3000/articles");
         setArticles(response.data.article);
         setTimeout(() => {
           setLoading(false);
@@ -30,14 +33,12 @@ const HomePage = () => {
   return (
     <div>
       {loading ? (
-            <div className="flex items-center justify-center h-screen">
-            <div className="loading loading-lg"></div>
-          </div>
+        <div className="flex items-center justify-center h-screen">
+          <div className="loading loading-lg"></div>
+        </div>
       ) : (
         <TableArticleList articles={articles} />
       )}
     </div>
   );
-};
-
-export default HomePage;
+}

@@ -30,7 +30,7 @@ export default function Navbar() {
           </div>
           <div className="mx-4">
             <a
-              href="#"
+              href="/categories"
               className="text-gray text-lg font-bold hover:text-blue-500 animate-pulse transition duration-300"
             >
             </a>

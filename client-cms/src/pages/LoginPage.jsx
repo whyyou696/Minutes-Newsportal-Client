@@ -1,111 +1,93 @@
-import React from "react";
-import axios from "axios";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import logo from "../assets/logo.png";
 
-export default function LoginPage() {
+export default function Login() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
+  const changeInput = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
-
-    setForm({
+    setForm(() => ({
       ...form,
       [name]: value,
-    });
+    }));
   };
 
-  const handleSubmit = async (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-
     try {
-      const { data } = await axios({
-        method: "post",
-        url: `https://minutes-news.wahyurj.my.id/users/login`,
-        data: form,
-      });
-      localStorage.setItem("access_token", data.access_token);
+      const { data } = await axios.post(`https://minutes-news.wahyurj.my.id/login`, form);
       Swal.fire({
         icon: "success",
-        title: "Login Success!",
-        showConfirmButton: false,
-        timer: 1000,
+        title: "Login Success",
+        text: `Welcome ${form.email}`,
       });
+
+      localStorage.access_token = data.token;
       navigate("/");
-      console.log(data);
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Oops...",
+        title: "Oops",
         text: error.response.data.message,
       });
-      console.log(error);
     }
   };
-  return (
-    <>
-      <div className="flex flex-col lg:flex-row min-h-screen overflow-hidden">
-        <div className="lg:w-1/2 bg-cover bg-center">
-          <img
-            src="./src/assets/bglogin.jpg"
-            alt="Background"
-            className="w-full h-full object-cover"
-          />
-        </div>
 
-        <div className="relative flex flex-col justify-center items-center p-6 m-auto bg-white bg-opacity-70 rounded-md shadow-xl shadow-blue-500/40 ring ring-2 ring-blue-500 lg:max-w-xl">
-          <img src="./src/assets/logo.png" alt="Logo" className="w-20 h-20 mb-4" />
-          <h1 className="text-3xl font-semibold text-center text-blue-500">
-            Login
-          </h1>
-          <form className="mt-6">
-            <div className="mb-2">
-              <label
-                htmlFor="email"
-                className="block text-sm font-semibold text-gray-800"
-              >
+  return (
+    <section className="w-full h-screen flex justify-center items-center">
+      <div className="w-[30%] h-fit bg-white shadow-lg px-10 rounded-lg flex">
+        <div className="flex-1">
+          <div className="text-center text-sky-400 mt-10">
+            <img src={logo} alt="Logo" className="w-25 h-20 mx-auto mb-3" />
+            <h1 className="text-[20px] mb-3 font-bold">Login</h1>
+          </div>
+          {/* Form */}
+          <form onSubmit={submit} className="mb-4">
+            <div className="mb-3">
+              <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Email
               </label>
               <input
-                type="email"
+                onChange={changeInput}
+                name="email"
+                type="text"
                 id="email"
-                onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-black bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="w-full p-2.5 shadow-md rounded-md italic"
+                placeholder="name@example.com"
               />
             </div>
-            <div className="mb-2">
-              <label
-                htmlFor="password"
-                className="block text-sm font-semibold text-gray-800"
-              >
+            <div className="mb-3">
+              <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Password
               </label>
               <input
+                onChange={changeInput}
+                name="password"
                 type="password"
                 id="password"
-                onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-blue-500 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="w-full p-2.5 shadow-md rounded-md"
+                placeholder="*****"
               />
             </div>
+            <div className="w-full h-fit flex justify-center items-center">
+              <button
+                type="submit"
+                className="bg-sky-400 hover:bg-sky-300 transition-all ease-in-out duration-300 text-white px-8 py-2 rounded-md"
+              >
+                Login
+              </button>
+            </div>
           </form>
-          <button onClick={handleSubmit} type="submit" className="btn btn-outline btn-info">Login</button>
-
-          <p className="mt-8 text-xs font-light text-center text-gray-700">
-            {" "}
-            Don't have an account?{" "}
-            <a href="#" className="font-medium text-blue-500 hover:underline">
-              Register
-            </a>
-          </p>
         </div>
       </div>
-    </>
+    </section>
   );
 }
+

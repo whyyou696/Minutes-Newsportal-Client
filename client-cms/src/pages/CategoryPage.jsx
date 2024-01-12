@@ -10,7 +10,8 @@ export default function CategoryPage() {
   useEffect(() => {
     const fetchDataCategory = async () => {
       try {
-        const response = await Axios.get("https://minutes-news.wahyurj.my.id/publics/categories");
+        const response = await Axios.get("https://minutes-news.wahyurj.my.id/publics/categories")
+        // const response = await Axios.get("http://localhost:3000/categories");
         setCategory(response.data);
         setTimeout(() => {
           setLoading(false);
