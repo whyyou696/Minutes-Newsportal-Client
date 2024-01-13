@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import Testimony from "../components/testimony";
 import Carousel from "../components/Carousel";
 
-export default function HomePage () {
+const HomePage = () => {
   const [articles, setArticles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
@@ -73,3 +73,5 @@ export default function HomePage () {
     </>
   );
 };
+
+export default HomePage;
