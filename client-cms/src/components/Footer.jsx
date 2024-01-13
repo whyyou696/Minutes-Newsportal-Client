@@ -26,7 +26,7 @@ export default function Footer() {
   </nav> 
   <aside>
     <img src={logo} alt="logo" width={70} height={70}/>
-    <p>ACME Industries Ltd.<br/>Providing reliable tech since 1992</p>
+    <p className="footer-title">Minutes Newsportal<br/>Copyright © 2024 - All right reserved</p>
   </aside> 
 </footer>
 </>;

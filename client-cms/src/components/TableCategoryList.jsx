@@ -15,6 +15,7 @@ export default function TableCategoryList({ category }) {
             <tr key={categories.id} className="py-2 px-4 border-b border-white">
               <td className="border-r border-white text-center">{categories.id}</td>
               <td className="border-r border-white text-center">{categories.name}</td>
+              
             </tr>
           ))}
         </tbody>

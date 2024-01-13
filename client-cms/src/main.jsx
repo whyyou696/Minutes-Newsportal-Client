@@ -5,11 +5,12 @@ import './index.css';
 import Layout from './App.jsx';
 import HomePage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
-import CategoryPage from './pages/CategoryPage.jsx';
 import Register from './pages/RegisterPage.jsx';
 import UploadImage from './pages/UploadImage.jsx';
 import CreateArticle from './pages/CreateArticle.jsx';
-
+import CategoryPage from './pages/CategoryPage.jsx';
+import CreateCategory from './pages/CreateCategory.jsx';
+import EditArticle from './pages/EditArticle.jsx';
 const authCMS = () => {
   const access_token = localStorage.access_token;
   if (!access_token) {
@@ -39,14 +40,23 @@ const router = createBrowserRouter([
         element: <CategoryPage />,
       },
       {
+        path: '/create-category',
+        element: <CreateCategory />,
+      },
+      {
         path: '/upload/:id',
         element: <UploadImage />,
       },
       {
-        path: '/create-article', // Add a route for CreateArticle
+        path: '/create-article',
         element: <CreateArticle />,
       },
+      {
+        path: '/edit-article/:id',
+        element: <EditArticle/>,
+      }
     ],
+
   },
   {
     path: '/',

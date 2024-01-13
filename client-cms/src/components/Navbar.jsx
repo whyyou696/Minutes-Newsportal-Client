@@ -43,25 +43,6 @@ export default function Navbar() {
         <div className="flex items-center space-x-4 text-center">
           <div>
             <button
-              onClick={() => navigate("/home")}
-              className="bg-gray-400 hover:bg-gray-300 hover:text-black transition-all ease-in-out duration-300 text-white font-bold px-2 py-1 rounded-md space-x-2 ml-2"
-            >
-              Article
-            </button>
-            <button
-              onClick={() => navigate("/categories")}
-              className="bg-gray-400 hover:bg-gray-300 hover:text-black transition-all ease-in-out duration-300 text-white font-bold px-2 py-1 rounded-md space-x-2 ml-2"
-            >
-              Categories
-            </button>
-            <Link to="/create-article">
-              <button
-                className="bg-gray-400 hover:bg-gray-300 hover:text-black transition-all ease-in-out duration-300 text-white font-bold px-2 py-1 rounded-md space-x-2 ml-2"
-              >
-                Create Article
-              </button>
-            </Link>
-            <button
               onClick={() => navigate("/register")}
               className="bg-blue-400 hover:bg-gray-300 hover:text-black transition-all ease-in-out duration-300 text-white font-bold px-2 py-1 rounded-md space-x-2 ml-2"
             >
