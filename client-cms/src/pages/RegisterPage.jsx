@@ -35,7 +35,7 @@ export default function Register() {
         title: "Register Success",
       });
 
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.log(error);
       Swal.fire({

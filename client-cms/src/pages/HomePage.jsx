@@ -10,11 +10,9 @@ export default function HomePage() {
   useEffect(() => {
     const fetchDataArticle = async () => {
       try {
-        // const response = await Axios.get(
-        //   "https://minutes-news.wahyurj.my.id/publics"
-        // ),
         const response = await Axios.get(
           "https://minutes-news.wahyurj.my.id/articles",{
+          // "http://localhost:3000/articles",{
           headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },

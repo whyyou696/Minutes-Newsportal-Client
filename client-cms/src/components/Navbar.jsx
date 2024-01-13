@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 export default function Navbar() {
   const [isSticky, setIsSticky] = useState(false);
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    navigate("/");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,16 +32,12 @@ export default function Navbar() {
   return (
     <>
       <div
-        className={`bg-white flex justify-between items-center p-2 ${
+        className={`bg-gray-100 flex justify-between items-center p-2 ${
           isSticky ? "fixed top-0 left-0 right-0 shadow-md z-50" : ""
         }`}
       >
         <div className="flex items-center">
-          <img
-            src={logo}
-            alt="Logo"
-            className="w-16 h-16"
-          />
+          <img src={logo} alt="Logo" className="w-16 h-16" />
         </div>
         <div className="flex items-center space-x-4 text-center">
           <div>
@@ -61,10 +63,24 @@ export default function Navbar() {
             >
               Register
             </Link>
+            <Link to="/create-article"> {/* Link to CreateArticle component */}
+              <button
+                className="bg-gray-300 hover:bg-green-400 hover:text-white transition-all ease-in-out duration-300 text-black font-bold px-2 py-1 rounded-md space-x-2 ml-2"
+              >
+                Create Article
+              </button>
+            </Link>
+            <button
+              type="submit"
+              onClick={handleLogout}
+              className="bg-red-400 hover:bg-gray-300 hover:text-black transition-all ease-in-out duration-300 text-white font-bold px-2 py-1 rounded-md space-x-2 ml-2"
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>
-      <div className="h-16"></div> {/* Add a spacer to prevent content from being overlapped by the fixed navbar */}
+      <div className="h-16"></div>
     </>
   );
 }
