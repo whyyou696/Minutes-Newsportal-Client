@@ -2,24 +2,32 @@ import React from "react";
 import logo from "../assets/logo.png";
 
 export default function Footer() {
-  return (
-    <footer className="footer bg-gray-100 text-black rounded p-6 text-lg mt-10 font-bold">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div className="md:col-span-2 lg:col-span-1">
-          <p className="text-sm mt-4">
-            Portal Berita yang Terupdate, Terpercaya, Dan Teraktual. Memberikan
-            Akses dan Kenyamanan untuk anda membaca Berita
-          </p>
-        </div>
-        <div className="col-span-2 flex justify-center items-center flex-col md:flex-row ">
-          <a href="/" className="font-bold mb-4 md:mb-0 md:mr-4">
-            <img src={logo} alt="Logo" style={{ width: "120px" }} />
-          </a>
-        </div>
-      </div>
-      <p className="text-sm text-gray-600 text-center md:text-left">
-        &copy; 2023 - Minutes Newsportal. All rights reserved.
-      </p>
-    </footer>
-  );
+  return <>
+  <footer className="footer p-10 bg-base-200 text-base-content">
+  <nav>
+    <header className="footer-title">Company</header> 
+    <a className="link link-hover">About us</a>
+    <a className="link link-hover">Contact</a>
+    <a className="link link-hover">Jobs</a>
+    <a className="link link-hover">Press kit</a>
+  </nav> 
+  <nav>
+    <header className="footer-title">Legal</header> 
+    <a className="link link-hover">Terms of use</a>
+    <a className="link link-hover">Privacy policy</a>
+    <a className="link link-hover">Cookie policy</a>
+  </nav>
+  <nav>
+    <header className="footer-title">Services</header> 
+    <a className="link link-hover">Branding</a>
+    <a className="link link-hover">Design</a>
+    <a className="link link-hover">Marketing</a>
+    <a className="link link-hover">Advertisement</a>
+  </nav> 
+  <aside>
+    <img src={logo} alt="logo" width={70} height={70}/>
+    <p>ACME Industries Ltd.<br/>Providing reliable tech since 1992</p>
+  </aside> 
+</footer>
+</>;
 }

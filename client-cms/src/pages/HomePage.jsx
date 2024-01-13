@@ -10,13 +10,11 @@ export default function HomePage() {
   useEffect(() => {
     const fetchDataArticle = async () => {
       try {
-        const response = await Axios.get(
-          "https://minutes-news.wahyurj.my.id/articles",{
-          // "http://localhost:3000/articles",{
+        const response = await Axios.get("https://minutes-news.wahyurj.my.id/articles", {
           headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-      })
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        });
         setArticles(response.data);
         setTimeout(() => {
           setLoading(false);
@@ -33,6 +31,30 @@ export default function HomePage() {
     fetchDataArticle();
   }, []);
 
+  const handleDelete = async (articleId) => {
+    try {
+      await Axios.delete(`https://minutes-news.wahyurj.my.id/articles/${articleId}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      });
+
+      setArticles((prevArticles) => prevArticles.filter((article) => article.id !== articleId));
+
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Article deleted successfully!",
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.response.data.message,
+      });
+    }
+  };
+
   return (
     <div>
       {loading ? (
@@ -40,7 +62,7 @@ export default function HomePage() {
           <div className="loading loading-lg"></div>
         </div>
       ) : (
-        <TableArticleList articles={articles} />
+        <TableArticleList articles={articles} onDelete={handleDelete} />
       )}
     </div>
   );
