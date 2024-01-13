@@ -23,7 +23,7 @@ export default function Navbar() {
   return (
     <>
       <div
-        className={`bg-gray-100 flex justify-between items-center p-2 ${
+        className={`bg-gray-200 flex justify-between items-center p-2 ${
           isSticky ? "fixed top-0 left-0 right-0 shadow-md z-50" : ""
         }`}
       >
