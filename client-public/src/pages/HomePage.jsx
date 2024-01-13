@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import CardItem from "../components/CardItem";
 import Swal from "sweetalert2";
+import Testimony from "../components/testimony";
+import Carousel from "../components/Carousel";
 
-const HomePage = () => {
+export default function HomePage () {
   const [articles, setArticles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
@@ -42,26 +44,32 @@ const HomePage = () => {
     indexOfLastItem
   );
 
+  const totalPages = Math.ceil(filteredArticles.length / itemsPerPage);
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
-      {loading && (
-        <div className="flex items-center justify-center h-screen">
-          <div className="loading loading-lg"></div>
-        </div>
-      )}
+    <>
+      <Carousel />
+      <div>
+        {loading && (
+          <div className="flex items-center justify-center h-screen">
+            <div className="loading loading-lg"></div>
+          </div>
+        )}
 
-      {!loading && (
-        <CardItem
-          articles={currentItems}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          paginate={paginate}
-        />
-      )}
-    </div>
+        {!loading && (
+          <CardItem
+            articles={currentItems}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            paginate={paginate}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
+        )}
+      </div>
+      <Testimony />
+    </>
   );
 };
-
-export default HomePage;

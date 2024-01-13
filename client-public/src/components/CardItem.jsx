@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CardItem = ({ articles, searchQuery, setSearchQuery, paginate,itemsPerPage }) => {
+function CardItem({ articles, searchQuery, setSearchQuery, paginate, currentPage, totalPages }) {
   return (
     <div>
       <div className="flex justify-end mb-4">
@@ -43,13 +43,15 @@ const CardItem = ({ articles, searchQuery, setSearchQuery, paginate,itemsPerPage
       </div>
 
       <div className="flex justify-center mt-4">
-        {Array.from({
-          length: Math.ceil(articles.length / itemsPerPage),
-        }).map((item, index) => (
+        {Array.from({ length: totalPages }).map((_, index) => (
           <button
             key={index}
             onClick={() => paginate(index + 1)}
-            className="mx-2 bg-blue-500 text-black rounded-full px-4 py-2 transition-transform transform hover:bg-red-500 text-white"
+            className={`mx-2 ${
+              currentPage === index + 1
+                ? "bg-blue-500 text-black"
+                : "bg-gray-400 text-white"
+            } rounded-full px-4 py-2 transition-transform transform hover:bg-red-500`}
           >
             {index + 1}
           </button>
@@ -57,6 +59,6 @@ const CardItem = ({ articles, searchQuery, setSearchQuery, paginate,itemsPerPage
       </div>
     </div>
   );
-};
+}
 
 export default CardItem;
